@@ -1,3 +1,11 @@
+import streamlit as st
+from data_fetch import get_stock_data
+from model import train_model, predict_next
+
+st.title("📈 Live Stock Dashboard")
+
+ticker = st.text_input("Enter Stock Symbol", "AAPL")
+
 data = get_stock_data(ticker)
 
 if data is None or data.empty:
