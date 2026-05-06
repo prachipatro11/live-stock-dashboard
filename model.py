@@ -1,7 +1,9 @@
-from sklearn.linear_model import LinearRegression
-import numpy as np
-
 def train_model(data):
+    data = data.dropna()   # REMOVE NaN values
+
+    if len(data) < 5:
+        raise ValueError("Not enough data to train model")
+
     data = data.reset_index()
     data['Days'] = np.arange(len(data))
 
@@ -12,8 +14,3 @@ def train_model(data):
     model.fit(X, y)
 
     return model, data
-
-def predict_next(model, data):
-    next_day = [[len(data)]]
-    prediction = model.predict(next_day)
-    return prediction[0]
